@@ -8,11 +8,10 @@ def inorder_traversal(root):
       return []
     result = []
     stack = [root]
-    while len(stack) > 0:
+    while stack:
         curr_node = stack.pop()
         if curr_node.left:
-            stack.append(curr_node)
-            stack.append(curr_node.left)
+            stack.extend((curr_node, curr_node.left))
             curr_node.left = None
         else:
             result.append(curr_node.val)
@@ -29,7 +28,7 @@ def preorder_traversal(root):
         return []
     result = []
     stack = [root]
-    while len(stack) > 0:
+    while stack:
         curr_node = stack.pop()
         result.append(curr_node.val)
         if curr_node.right:
@@ -47,15 +46,13 @@ def postorder_traversal(root):
         return []
     result = []
     stack = [root]
-    while len(stack) > 0:
+    while stack:
         curr_node = stack.pop()
         if curr_node.left:
-            stack.append(curr_node)
-            stack.append(curr_node.left)
+            stack.extend((curr_node, curr_node.left))
             curr_node.left = None
         elif curr_node.right:
-            stack.append(curr_node)
-            stack.append(curr_node.right)
+            stack.extend((curr_node, curr_node.right))
             curr_node.right = None
         else:
             result.append(curr_node.val)
